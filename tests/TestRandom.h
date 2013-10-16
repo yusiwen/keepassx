@@ -15,28 +15,37 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_TESTARGUMENTPARSER_H
-#define KEEPASSX_TESTARGUMENTPARSER_H
+#ifndef KEEPASSX_TESTRANDOM_H
+#define KEEPASSX_TESTRANDOM_H
 
-#include <QHash>
+#include "core/Global.h"
+#include "crypto/Random.h"
+
 #include <QObject>
 
-class TestArgumentParser : public QObject
+class RandomBackendTest : public RandomBackend
+{
+public:
+    RandomBackendTest();
+    void randomize(void* data, int len) Q_DECL_OVERRIDE;
+    void setNextBytes(const QByteArray& nextBytes);
+
+private:
+    QByteArray m_nextBytes;
+    int m_bytesIndex;
+};
+
+class TestRandom : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
-    void testNoArguments();
-    void testMissingOptionValue();
-    void testUnknownArgument();
-    void testFilename();
-    void testMultipleArguments();
-    void testFilenameWithoutOption();
+    void initTestCase();
+    void testUInt();
+    void testUIntRange();
 
 private:
-    void parse(const QStringList& arguments);
-
-    QHash<QString, QString> argumentMap;
+    RandomBackendTest* m_backend;
 };
 
-#endif // KEEPASSX_TESTARGUMENTPARSER_H
+#endif // KEEPASSX_TESTRANDOM_H
