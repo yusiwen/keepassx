@@ -27,6 +27,7 @@
 #include <QTimer>
 
 #include "autotype/AutoType.h"
+#include "core/Config.h"
 #include "core/FilePath.h"
 #include "core/Metadata.h"
 #include "core/Tools.h"
@@ -154,6 +155,7 @@ DatabaseWidget::DatabaseWidget(Database* db, QWidget* parent)
     connect(m_searchUi->caseSensitiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(startSearch()));
     connect(m_searchUi->searchCurrentRadioButton, SIGNAL(toggled(bool)), this, SLOT(startSearch()));
     connect(m_searchUi->searchRootRadioButton, SIGNAL(toggled(bool)), this, SLOT(startSearch()));
+    connect(m_searchUi->searchEdit, SIGNAL(returnPressed()), m_entryView, SLOT(setFocus()));
     connect(m_searchTimer, SIGNAL(timeout()), this, SLOT(search()));
     connect(closeAction, SIGNAL(triggered()), this, SLOT(closeSearch()));
 
@@ -222,7 +224,7 @@ void DatabaseWidget::cloneEntry()
         return;
     }
 
-    Entry* entry = currentEntry->clone();
+    Entry* entry = currentEntry->clone(Entry::CloneNewUuid | Entry::CloneResetTimeInfo);
     entry->setGroup(currentEntry->group());
     m_entryView->setFocus();
     m_entryView->setCurrentEntry(entry);
@@ -295,6 +297,10 @@ void DatabaseWidget::copyUsername()
     }
 
     clipboard()->setText(currentEntry->username());
+
+    if (config()->get("MinimizeOnCopy").toBool()) {
+        window()->showMinimized();
+    }
 }
 
 void DatabaseWidget::copyPassword()
@@ -306,6 +312,10 @@ void DatabaseWidget::copyPassword()
     }
 
     clipboard()->setText(currentEntry->password());
+
+    if (config()->get("MinimizeOnCopy").toBool()) {
+        window()->showMinimized();
+    }
 }
 
 void DatabaseWidget::copyAttribute(QAction* action)
@@ -317,6 +327,10 @@ void DatabaseWidget::copyAttribute(QAction* action)
     }
 
     clipboard()->setText(currentEntry->attributes()->value(action->text()));
+
+    if (config()->get("MinimizeOnCopy").toBool()) {
+        window()->showMinimized();
+    }
 }
 
 void DatabaseWidget::performAutoType()
