@@ -40,6 +40,8 @@ MainWindow::MainWindow()
 {
     m_ui->setupUi(this);
 
+    restoreGeometry(config()->get("window/Geometry").toByteArray());
+
     setWindowIcon(filePath()->applicationIcon());
     QAction* toggleViewAction = m_ui->toolBar->toggleViewAction();
     toggleViewAction->setText(tr("Show toolbar"));
@@ -226,7 +228,9 @@ void MainWindow::updateCopyAttributesMenu()
     if (!dbWidget) {
         return;
     }
-    if (!dbWidget->entryView()->isSingleEntrySelected()) {
+
+    Entry* entry = dbWidget->entryView()->currentEntry();
+    if (!entry || !dbWidget->entryView()->isSingleEntrySelected()) {
         return;
     }
 
@@ -234,8 +238,6 @@ void MainWindow::updateCopyAttributesMenu()
     for (int i = EntryAttributes::DefaultAttributes.size() + 1; i < actions.size(); i++) {
         delete actions[i];
     }
-
-    Entry* entry = dbWidget->entryView()->currentEntry();
 
     Q_FOREACH (const QString& key, entry->attributes()->customKeys()) {
         QAction* action = m_ui->menuEntryCopyAttribute->addAction(key);
@@ -414,6 +416,26 @@ void MainWindow::databaseTabChanged(int tabIndex)
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+    bool accept = saveLastDatabases();
+
+    if (accept) {
+        saveWindowInformation();
+
+        event->accept();
+    }
+    else {
+        event->ignore();
+    }
+}
+
+void MainWindow::saveWindowInformation()
+{
+    config()->set("window/Geometry", saveGeometry());
+}
+
+bool MainWindow::saveLastDatabases()
+{
+    bool accept;
     m_openDatabases.clear();
     bool openPreviousDatabasesOnStartup = config()->get("OpenPreviousDatabasesOnStartup").toBool();
 
@@ -423,10 +445,10 @@ void MainWindow::closeEvent(QCloseEvent* event)
     }
 
     if (!m_ui->tabWidget->closeAllDatabases()) {
-        event->ignore();
+        accept = false;
     }
     else {
-        event->accept();
+        accept = true;
     }
 
     if (openPreviousDatabasesOnStartup) {
@@ -434,6 +456,8 @@ void MainWindow::closeEvent(QCloseEvent* event)
                    this, SLOT(rememberOpenDatabases(QString)));
         config()->set("LastOpenedDatabases", m_openDatabases);
     }
+
+    return accept;
 }
 
 void MainWindow::showEntryContextMenu(const QPoint& globalPos)
