@@ -500,22 +500,6 @@ void Group::copyDataFrom(const Group* other)
     m_lastTopVisibleEntry = other->m_lastTopVisibleEntry;
 }
 
-Database* Group::exportToDb()
-{
-    Q_ASSERT(database());
-
-    Database* db = new Database();
-    Group* clonedGroup = clone(Entry::CloneNewUuid | Entry::CloneIncludeHistory);
-    clonedGroup->setParent(db->rootGroup());
-
-    QSet<Uuid> customIcons = customIconsRecursive();
-    db->metadata()->copyCustomIcons(customIcons, database()->metadata());
-
-    db->copyAttributesFrom(database());
-
-    return db;
-}
-
 void Group::addEntry(Entry* entry)
 {
     Q_ASSERT(entry);
@@ -612,24 +596,7 @@ void Group::recCreateDelObjects()
     }
 }
 
-QList<Entry*> Group::search(const QString& searchTerm, Qt::CaseSensitivity caseSensitivity,
-                            bool resolveInherit)
-{
-    QList<Entry*> searchResult;
-    if (includeInSearch(resolveInherit)) {
-        Q_FOREACH (Entry* entry, m_entries) {
-            if (entry->match(searchTerm, caseSensitivity)) {
-                searchResult.append(entry);
-            }
-        }
-        Q_FOREACH (Group* group, m_children) {
-            searchResult.append(group->search(searchTerm, caseSensitivity, false));
-        }
-    }
-    return searchResult;
-}
-
-bool Group::includeInSearch(bool resolveInherit)
+bool Group::resolveSearchingEnabled() const
 {
     switch (m_data.searchingEnabled) {
     case Inherit:
@@ -637,12 +604,27 @@ bool Group::includeInSearch(bool resolveInherit)
             return true;
         }
         else {
-            if (resolveInherit) {
-                return m_parent->includeInSearch(true);
-            }
-            else {
-                return true;
-            }
+            return m_parent->resolveSearchingEnabled();
+        }
+    case Enable:
+        return true;
+    case Disable:
+        return false;
+    default:
+        Q_ASSERT(false);
+        return false;
+    }
+}
+
+bool Group::resolveAutoTypeEnabled() const
+{
+    switch (m_data.autoTypeEnabled) {
+    case Inherit:
+        if (!m_parent) {
+            return true;
+        }
+        else {
+            return m_parent->resolveAutoTypeEnabled();
         }
     case Enable:
         return true;

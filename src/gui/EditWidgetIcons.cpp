@@ -35,6 +35,7 @@ IconStruct::IconStruct()
 EditWidgetIcons::EditWidgetIcons(QWidget* parent)
     : QWidget(parent)
     , m_ui(new Ui::EditWidgetIcons())
+    , m_database(Q_NULLPTR)
     , m_defaultIconModel(new DefaultIconModel(this))
     , m_customIconModel(new CustomIconModel(this))
 {
@@ -193,8 +194,7 @@ void EditWidgetIcons::removeCustomIcon()
             }
             else {
                 MessageBox::information(this, tr("Can't delete icon!"),
-                                        tr("Can't delete icon. Still used by %1 items.")
-                                        .arg(iconUsedCount));
+                                        tr("Can't delete icon. Still used by %n item(s).", 0, iconUsedCount));
             }
         }
     }

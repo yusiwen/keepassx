@@ -30,6 +30,7 @@ Entry::Entry()
     , m_attachments(new EntryAttachments(this))
     , m_autoTypeAssociations(new AutoTypeAssociations(this))
     , m_tmpHistoryItem(Q_NULLPTR)
+    , m_modifiedSinceBegin(false)
     , m_updateTimeinfo(true)
 {
     m_data.iconNumber = DefaultIconNumber;
@@ -576,25 +577,6 @@ const Database* Entry::database() const
     else {
         return Q_NULLPTR;
     }
-}
-
-bool Entry::match(const QString& searchTerm, Qt::CaseSensitivity caseSensitivity)
-{
-    QStringList wordList = searchTerm.split(QRegExp("\\s"), QString::SkipEmptyParts);
-    Q_FOREACH (const QString& word, wordList) {
-        if (!wordMatch(word, caseSensitivity)) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool Entry::wordMatch(const QString& word, Qt::CaseSensitivity caseSensitivity)
-{
-    return title().contains(word, caseSensitivity) ||
-            username().contains(word, caseSensitivity) ||
-            url().contains(word, caseSensitivity) ||
-            notes().contains(word, caseSensitivity);
 }
 
 QString Entry::resolvePlaceholders(const QString& str) const

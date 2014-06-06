@@ -27,6 +27,7 @@
 #include "core/Metadata.h"
 #include "core/qsavefile.h"
 #include "gui/DatabaseWidget.h"
+#include "gui/DatabaseWidgetStateSync.h"
 #include "gui/DragTabBar.h"
 #include "gui/FileDialog.h"
 #include "gui/MessageBox.h"
@@ -46,12 +47,15 @@ const int DatabaseTabWidget::LastDatabasesCount = 5;
 
 DatabaseTabWidget::DatabaseTabWidget(QWidget* parent)
     : QTabWidget(parent)
+    , m_dbWidgetSateSync(new DatabaseWidgetStateSync(this))
 {
     DragTabBar* tabBar = new DragTabBar(this);
     tabBar->setDrawBase(false);
     setTabBar(tabBar);
 
     connect(this, SIGNAL(tabCloseRequested(int)), SLOT(closeDatabase(int)));
+    connect(this, SIGNAL(currentChanged(int)), SLOT(emitActivateDatabaseChanged()));
+    connect(this, SIGNAL(activateDatabaseChanged(DatabaseWidget*)), m_dbWidgetSateSync, SLOT(setActive(DatabaseWidget*)));
     connect(autoType(), SIGNAL(globalShortcutTriggered()), SLOT(performGlobalAutoType()));
 }
 
@@ -189,7 +193,7 @@ bool DatabaseTabWidget::closeDatabase(Database* db)
     if (dbName.right(1) == "*") {
         dbName.chop(1);
     }
-    if (dbStruct.dbWidget->currentMode() == DatabaseWidget::EditMode && db->hasKey()) {
+    if (dbStruct.dbWidget->isInEditMode() && db->hasKey()) {
         QMessageBox::StandardButton result =
             MessageBox::question(
             this, tr("Close?"),
@@ -503,7 +507,7 @@ DatabaseWidget* DatabaseTabWidget::currentDatabaseWidget()
     }
 }
 
-bool DatabaseTabWidget::hasLockableDatabases()
+bool DatabaseTabWidget::hasLockableDatabases() const
 {
     QHashIterator<Database*, DatabaseManagerStruct> i(m_dbList);
     while (i.hasNext()) {
@@ -584,6 +588,11 @@ void DatabaseTabWidget::changeDatabase(Database* newDb)
     connectDatabase(newDb, oldDb);
 }
 
+void DatabaseTabWidget::emitActivateDatabaseChanged()
+{
+    Q_EMIT activateDatabaseChanged(currentDatabaseWidget());
+}
+
 void DatabaseTabWidget::connectDatabase(Database* newDb, Database* oldDb)
 {
     if (oldDb) {
@@ -597,5 +606,17 @@ void DatabaseTabWidget::connectDatabase(Database* newDb, Database* oldDb)
 
 void DatabaseTabWidget::performGlobalAutoType()
 {
-    autoType()->performGlobalAutoType(m_dbList.keys());
+    QList<Database*> unlockedDatabases;
+
+    QHashIterator<Database*, DatabaseManagerStruct> i(m_dbList);
+    while (i.hasNext()) {
+        i.next();
+        DatabaseWidget::Mode mode = i.value().dbWidget->currentMode();
+
+        if (mode != DatabaseWidget::LockedMode) {
+            unlockedDatabases.append(i.key());
+        }
+    }
+
+    autoType()->performGlobalAutoType(unlockedDatabases);
 }

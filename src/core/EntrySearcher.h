@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2013 Florian Geyer <blueice@fobos.de>
+ *  Copyright (C) 2014 Florian Geyer <debfx@fobos.de>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,23 +15,23 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_ARGUMENTPARSER_H
-#define KEEPASSX_ARGUMENTPARSER_H
+#ifndef KEEPASSX_ENTRYSEARCHER_H
+#define KEEPASSX_ENTRYSEARCHER_H
 
-#include "core/Global.h"
+#include <QString>
 
-#include <QHash>
-#include <QStringList>
 
-class ArgumentParser
+class Group;
+class Entry;
+
+class EntrySearcher
 {
 public:
-    static QHash<QString, QString> parseArguments(const QStringList& args);
-
+    QList<Entry*> search(const QString& searchTerm, const Group* group, Qt::CaseSensitivity caseSensitivity);
 private:
-    static void parseOption(int& i, QHash<QString, QString>& argumentMap, const QStringList& args);
-
-    static const QStringList ArgumentKeys;
+    QList<Entry*> searchEntries(const QString& searchTerm, const Group* group, Qt::CaseSensitivity caseSensitivity);
+    QList<Entry*> matchEntry(const QString& searchTerm, Entry* entry, Qt::CaseSensitivity caseSensitivity);
+    bool wordMatch(const QString &word, Entry *entry, Qt::CaseSensitivity caseSensitivity);
 };
 
-#endif // KEEPASSX_ARGUMENTPARSER_H
+#endif // KEEPASSX_ENTRYSEARCHER_H

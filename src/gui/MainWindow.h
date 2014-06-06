@@ -67,6 +67,9 @@ private:
 
     static const QString BaseWindowTitle;
 
+    void saveWindowInformation();
+    bool saveLastDatabases();
+
     const QScopedPointer<Ui::MainWindow> m_ui;
     SignalMultiplexer m_actionMultiplexer;
     QAction* m_clearHistoryAction;
@@ -74,6 +77,7 @@ private:
     QActionGroup* m_copyAdditionalAttributeActions;
     QStringList m_openDatabases;
     InactivityTimer* m_inactivityTimer;
+    int m_countDefaultAttributes;
 
     Q_DISABLE_COPY(MainWindow)
 };
