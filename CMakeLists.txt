@@ -32,7 +32,7 @@ include(CheckCXXSourceCompiles)
 option(WITH_TESTS "Enable building of unit tests" ON)
 option(WITH_GUI_TESTS "Enable building of GUI tests" OFF)
 option(WITH_LTO "Enable Link Time Optimization (LTO)" OFF)
-option(WITH_CXX11 "Build with the C++ 11 standard" OFF)
+option(WITH_CXX11 "Build with the C++ 11 standard" ON)
 
 set(KEEPASSX_VERSION "2.0 alpha 6")
 set(KEEPASSX_VERSION_NUM "1.9.85")
@@ -149,9 +149,9 @@ elseif(APPLE)
 else()
   include(GNUInstallDirs)
 
-  set(BIN_INSTALL_DIR    "${CMAKE_INSTALL_BINDIR}")
-  set(PLUGIN_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/keepassx")
-  set(DATA_INSTALL_DIR   "${CMAKE_INSTALL_DATAROOTDIR}/keepassx")
+  set(BIN_INSTALL_DIR    "${CMAKE_INSTALL_FULL_BINDIR}")
+  set(PLUGIN_INSTALL_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/keepassx")
+  set(DATA_INSTALL_DIR   "${CMAKE_INSTALL_FULL_DATADIR}/keepassx")
 endif()
 
 if(WITH_TESTS)
@@ -165,6 +165,9 @@ endif()
 
 find_package(Qt4 4.6.0 REQUIRED ${QT_REQUIRED_MODULES})
 include(${QT_USE_FILE})
+# Debian sets the the build type to None for package builds.
+# Make sure we don't enable asserts there.
+set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS_NONE QT_NO_DEBUG)
 
 find_package(Gcrypt REQUIRED)
 if(NOT (${GCRYPT_VERSION_STRING} VERSION_LESS "1.6.0"))

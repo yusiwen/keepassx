@@ -248,9 +248,7 @@ void Group::setExpanded(bool expanded)
     if (m_data.isExpanded != expanded) {
         m_data.isExpanded = expanded;
         updateTimeinfo();
-        if (config()->get("ModifiedOnExpandedStateChanges").toBool()) {
-            Q_EMIT modified();
-        }
+        Q_EMIT modified();
     }
 }
 
@@ -432,6 +430,20 @@ QList<Entry*> Group::entriesRecursive(bool includeHistoryItems) const
 QList<const Group*> Group::groupsRecursive(bool includeSelf) const
 {
     QList<const Group*> groupList;
+    if (includeSelf) {
+        groupList.append(this);
+    }
+
+    Q_FOREACH (const Group* group, m_children) {
+        groupList.append(group->groupsRecursive(true));
+    }
+
+    return groupList;
+}
+
+QList<Group*> Group::groupsRecursive(bool includeSelf)
+{
+    QList<Group*> groupList;
     if (includeSelf) {
         groupList.append(this);
     }

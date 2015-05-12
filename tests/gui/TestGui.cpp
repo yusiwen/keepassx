@@ -51,7 +51,7 @@
 
 void TestGui::initTestCase()
 {
-    Crypto::init();
+    QVERIFY(Crypto::init());
     Config::createTempFileInstance();
     m_mainWindow = new MainWindow();
     m_tabWidget = m_mainWindow->findChild<DatabaseTabWidget*>("tabWidget");
@@ -170,20 +170,35 @@ void TestGui::testSearch()
     QVERIFY(searchAction->isEnabled());
     QToolBar* toolBar = m_mainWindow->findChild<QToolBar*>("toolBar");
     QWidget* searchActionWidget = toolBar->widgetForAction(searchAction);
-    QVERIFY(searchActionWidget->isEnabled());
-    QTest::mouseClick(searchActionWidget, Qt::LeftButton);
-
     EntryView* entryView = m_dbWidget->findChild<EntryView*>("entryView");
     QLineEdit* searchEdit = m_dbWidget->findChild<QLineEdit*>("searchEdit");
     QToolButton* clearSearch = m_dbWidget->findChild<QToolButton*>("clearButton");
 
+    QVERIFY(!searchEdit->hasFocus());
+
+    // Enter search
+    QTest::mouseClick(searchActionWidget, Qt::LeftButton);
+    QTRY_VERIFY(searchEdit->hasFocus());
+    // Search for "ZZZ"
     QTest::keyClicks(searchEdit, "ZZZ");
-
     QTRY_COMPARE(entryView->model()->rowCount(), 0);
-
+    // Escape
+    QTest::keyClick(m_mainWindow, Qt::Key_Escape);
+    QTRY_VERIFY(!searchEdit->hasFocus());
+    // Enter search again
+    QTest::mouseClick(searchActionWidget, Qt::LeftButton);
+    QTRY_VERIFY(searchEdit->hasFocus());
+    // Input and clear
+    QTest::keyClicks(searchEdit, "ZZZ");
+    QTRY_COMPARE(searchEdit->text(), QString("ZZZ"));
     QTest::mouseClick(clearSearch, Qt::LeftButton);
+    QTRY_COMPARE(searchEdit->text(), QString(""));
+    // Triggering search should select the existing text
+    QTest::keyClicks(searchEdit, "ZZZ");
+    QTest::mouseClick(searchActionWidget, Qt::LeftButton);
+    QTRY_VERIFY(searchEdit->hasFocus());
+    // Search for "some"
     QTest::keyClicks(searchEdit, "some");
-
     QTRY_COMPARE(entryView->model()->rowCount(), 4);
 
     clickIndex(entryView->model()->index(0, 1), entryView, Qt::LeftButton);
@@ -406,10 +421,12 @@ void TestGui::testKeePass1Import()
 
 void TestGui::testDatabaseLocking()
 {
+    MessageBox::setNextAnswer(QMessageBox::Cancel);
+
     triggerAction("actionLockDatabases");
 
     QCOMPARE(m_tabWidget->tabText(0), QString("Save [locked]"));
-    QCOMPARE(m_tabWidget->tabText(1), QString("basic [New database] [locked]*"));
+    QCOMPARE(m_tabWidget->tabText(1), QString("basic [New database]*"));
 
     QWidget* dbWidget = m_tabWidget->currentDatabaseWidget();
     QWidget* unlockDatabaseWidget = dbWidget->findChild<QWidget*>("unlockDatabaseWidget");
