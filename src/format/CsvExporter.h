@@ -1,5 +1,6 @@
 /*
- *  Copyright (C) 2014 Felix Geyer <debfx@fobos.de>
+ *  Copyright (C) 2015 Florian Geyer <blueice@fobos.de>
+ *  Copyright (C) 2015 Felix Geyer <debfx@fobos.de>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,39 +16,27 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_INACTIVITYTIMER_H
-#define KEEPASSX_INACTIVITYTIMER_H
+#ifndef KEEPASSX_CSVEXPORTER_H
+#define KEEPASSX_CSVEXPORTER_H
 
-#include <QMutex>
-#include <QObject>
+#include <QString>
 
-#include "core/Global.h"
+class Database;
+class Group;
+class QIODevice;
 
-class QTimer;
-
-class InactivityTimer : public QObject
+class CsvExporter
 {
-    Q_OBJECT
-
 public:
-    explicit InactivityTimer(QObject* parent = Q_NULLPTR);
-    void setInactivityTimeout(int inactivityTimeout);
-    void activate();
-    void deactivate();
-
-Q_SIGNALS:
-    void inactivityDetected();
-
-protected:
-    bool eventFilter(QObject* watched, QEvent* event);
-
-private Q_SLOTS:
-    void timeout();
+    bool exportDatabase(const QString& filename, const Database* db);
+    bool exportDatabase(QIODevice* device, const Database* db);
+    QString errorString() const;
 
 private:
-    QTimer* m_timer;
-    bool m_active;
-    QMutex m_emitMutx;
+    bool writeGroup(QIODevice* device, const Group* group, QString groupPath = QString());
+    void addColumn(QString& str, const QString& column);
+
+    QString m_error;
 };
 
-#endif // KEEPASSX_INACTIVITYTIMER_H
+#endif // KEEPASSX_CSVEXPORTER_H

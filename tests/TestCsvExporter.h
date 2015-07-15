@@ -1,5 +1,6 @@
 /*
- *  Copyright (C) 2010 Felix Geyer <debfx@fobos.de>
+ *  Copyright (C) 2015 Florian Geyer <blueice@fobos.de>
+ *  Copyright (C) 2015 Felix Geyer <debfx@fobos.de>
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,39 +16,33 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEEPASSX_TESTKEEPASS2XMLREADER_H
-#define KEEPASSX_TESTKEEPASS2XMLREADER_H
+#ifndef KEEPASSX_TESTCSVEXPORTER_H
+#define KEEPASSX_TESTCSVEXPORTER_H
 
-#include <QDateTime>
 #include <QObject>
 
 class Database;
+class CsvExporter;
 
-class TestKeePass2XmlReader : public QObject
+class TestCsvExporter : public QObject
 {
     Q_OBJECT
 
+public:
+    static const QString ExpectedHeaderLine;
+
 private Q_SLOTS:
+    void init();
     void initTestCase();
-    void testMetadata();
-    void testCustomIcons();
-    void testCustomData();
-    void testGroupRoot();
-    void testGroup1();
-    void testGroup2();
-    void testEntry1();
-    void testEntry2();
-    void testEntryHistory();
-    void testDeletedObjects();
-    void testBroken();
-    void testBroken_data();
-    void testEmptyUuids();
-    void cleanupTestCase();
+    void cleanUp();
+    void testExport();
+    void testEmptyDatabase();
+    void testNestedGroups();
 
 private:
-    static QDateTime genDT(int year, int month, int day, int hour, int min, int second);
-
     Database* m_db;
+    CsvExporter* m_csvExporter;
+
 };
 
-#endif // KEEPASSX_TESTKEEPASS2XMLREADER_H
+#endif // KEEPASSX_TESTCSVEXPORTER_H

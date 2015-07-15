@@ -26,6 +26,7 @@
 #include "core/Group.h"
 #include "core/Metadata.h"
 #include "core/qsavefile.h"
+#include "format/CsvExporter.h"
 #include "gui/DatabaseWidget.h"
 #include "gui/DatabaseWidgetStateSync.h"
 #include "gui/DragTabBar.h"
@@ -225,9 +226,9 @@ bool DatabaseTabWidget::closeDatabase(Database* db)
         QMessageBox::StandardButton result =
             MessageBox::question(
             this, tr("Close?"),
-            tr("\"%1\" is in edit mode.\nClose anyway?").arg(dbName),
-            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-        if (result == QMessageBox::No) {
+            tr("\"%1\" is in edit mode.\nDiscard changes and close anyway?").arg(dbName),
+            QMessageBox::Discard | QMessageBox::Cancel, QMessageBox::Cancel);
+        if (result == QMessageBox::Cancel) {
             return false;
         }
     }
@@ -240,7 +241,7 @@ bool DatabaseTabWidget::closeDatabase(Database* db)
                 MessageBox::question(
                 this, tr("Save changes?"),
                 tr("\"%1\" was modified.\nSave changes?").arg(dbName),
-                QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
+                QMessageBox::Yes | QMessageBox::Discard | QMessageBox::Cancel, QMessageBox::Yes);
             if (result == QMessageBox::Yes) {
                 saveDatabase(db);
             }
@@ -397,6 +398,27 @@ bool DatabaseTabWidget::saveDatabaseAs(int index)
     }
 
     return saveDatabaseAs(indexDatabase(index));
+}
+
+void DatabaseTabWidget::exportToCsv()
+{
+    Database* db = indexDatabase(currentIndex());
+    if (!db) {
+        Q_ASSERT(false);
+        return;
+    }
+
+    QString fileName = fileDialog()->getSaveFileName(this, tr("Export database to CSV file"),
+                                                     QString(), tr("CSV file").append(" (*.csv)"));
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    CsvExporter csvExporter;
+    if (!csvExporter.exportDatabase(fileName, db)) {
+        MessageBox::critical(this, tr("Error"), tr("Writing the CSV file failed.") + "\n\n"
+                             + csvExporter.errorString());
+    }
 }
 
 void DatabaseTabWidget::changeMasterKey()
