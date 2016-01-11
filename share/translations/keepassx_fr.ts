@@ -9,6 +9,10 @@
         <source>KeePassX is distributed under the term of the GNU General Public License (GPL) version 2 or (at your option) version 3.</source>
         <translation>KeePassX est distribué selon les conditions de la GNU General Public License (GPL) version 2 ou (à votre choix) version 3.</translation>
     </message>
+    <message>
+        <source>Revision</source>
+        <translation>Version</translation>
+    </message>
 </context>
 <context>
     <name>AutoType</name>
@@ -25,7 +29,7 @@
     <name>AutoTypeAssociationsModel</name>
     <message>
         <source>Window</source>
-        <translation>Fenêtre </translation>
+        <translation>Fenêtre</translation>
     </message>
     <message>
         <source>Sequence</source>
@@ -63,7 +67,7 @@
     </message>
     <message>
         <source>Key file</source>
-        <translation>Fichier de clé</translation>
+        <translation>Fichier-clé</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -83,7 +87,7 @@
     </message>
     <message>
         <source>Create Key File...</source>
-        <translation>Créer un fichier de clé...</translation>
+        <translation>Créer un fichier-clé...</translation>
     </message>
     <message>
         <source>Error</source>
@@ -91,11 +95,11 @@
     </message>
     <message>
         <source>Unable to create Key File : </source>
-        <translation>Incapable de créer un fichier de clé :</translation>
+        <translation>Impossible de créer un fichier-clé :</translation>
     </message>
     <message>
         <source>Select a key file</source>
-        <translation>Choisir un fichier de clé</translation>
+        <translation>Choisir un fichier-clé</translation>
     </message>
     <message>
         <source>Question</source>
@@ -109,16 +113,26 @@
         <source>Different passwords supplied.</source>
         <translation>Les mots de passe ne sont pas identiques.</translation>
     </message>
+    <message>
+        <source>Failed to set key file</source>
+        <translation>Échec de définition du fichier-clé</translation>
+    </message>
+    <message>
+        <source>Failed to set %1 as the Key file:
+%2</source>
+        <translation>Impossible de définir %1 comme fichier-clé:
+%2</translation>
+    </message>
 </context>
 <context>
     <name>DatabaseOpenWidget</name>
     <message>
         <source>Enter master key</source>
-        <translation>Entrez la clé maîtresse</translation>
+        <translation>Entrez la clé maître</translation>
     </message>
     <message>
         <source>Key File:</source>
-        <translation>Fichier de clé :</translation>
+        <translation>Fichier-clé :</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -138,7 +152,7 @@
     </message>
     <message>
         <source>Can&apos;t open key file</source>
-        <translation>Impossible d&apos;ouvrir le fichier de clé</translation>
+        <translation>Impossible d&apos;ouvrir le fichier-clé</translation>
     </message>
     <message>
         <source>All files</source>
@@ -146,11 +160,11 @@
     </message>
     <message>
         <source>Key files</source>
-        <translation>Fichiers de clé</translation>
+        <translation>Fichiers-clés</translation>
     </message>
     <message>
         <source>Select key file</source>
-        <translation>Choisissez un fichier de clé</translation>
+        <translation>Choisissez un fichier-clé</translation>
     </message>
 </context>
 <context>
@@ -177,7 +191,7 @@
     </message>
     <message>
         <source> MiB</source>
-        <translation>MiB</translation>
+        <translation> MiB</translation>
     </message>
     <message>
         <source>Benchmark</source>
@@ -208,7 +222,7 @@
     </message>
     <message>
         <source>Open database</source>
-        <translation>Ovrire la base de données</translation>
+        <translation>Ouvrir la base de données</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -216,7 +230,7 @@
     </message>
     <message>
         <source>File not found!</source>
-        <translation>Fichier introuvable!</translation>
+        <translation>Fichier introuvable !</translation>
     </message>
     <message>
         <source>Open KeePass 1 database</source>
@@ -232,13 +246,7 @@
     </message>
     <message>
         <source>Close?</source>
-        <translation>Fermer?</translation>
-    </message>
-    <message>
-        <source>&quot;%1&quot; is in edit mode.
-Close anyway?</source>
-        <translation>&quot;%1&quot; est en cours de modification.
-Fermer quand même ?</translation>
+        <translation>Fermer ?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -256,7 +264,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Writing the database failed.</source>
-        <translation>Une erreur s&apos;est produite lors de l&apos;écriture de la base de données. </translation>
+        <translation>Une erreur s&apos;est produite lors de l&apos;écriture de la base de données.</translation>
     </message>
     <message>
         <source>Save database as</source>
@@ -270,12 +278,66 @@ Enregistrer les modifications ?</translation>
         <source>locked</source>
         <translation>verrouillée</translation>
     </message>
+    <message>
+        <source>The database you are trying to open is locked by another instance of KeePassX.
+Do you want to open it anyway? Alternatively the database is opened read-only.</source>
+        <translation>La base de données que vous essayez d&apos;ouvrir est verrouillée par une autre instance de KeePassX.
+Voulez-vous quand même l&apos;ouvrir ? Dans ce cas, elle sera ouverte en lecture seule.</translation>
+    </message>
+    <message>
+        <source>Lock database</source>
+        <translation>Verrouiiler la base de données</translation>
+    </message>
+    <message>
+        <source>Can't lock the database as you are currently editing it.
+Please press cancel to finish your changes or discard them.</source>
+        <translation>Impossible de verrouiller la base de données lors de modifications.
+Cliquez sur Annuler pour finir vos modifications ou abandonnez-les.</translation>
+    </message>
+    <message>
+        <source>This database has never been saved.
+You can save the database or stop locking it.</source>
+        <translation>Cette base de données n&apos;a pas encore été sauvegardée.
+Vous devez la sauvegarder ou annuler son verrouillage.</translation>
+    </message>
+    <message>
+        <source>This database has been modified.
+Do you want to save the database before locking it?
+Otherwise your changes are lost.</source>
+        <translation>La base de données a été modifiée.
+Voulez-vous l&apos;enregistrer avant de la verrouiller ?
+Autrement, vos modifications seront perdues.</translation>
+    </message>
+    <message>
+        <source>&quot;%1&quot; is in edit mode.
+Discard changes and close anyway?</source>
+        <translation>&quot;%1&quot; est en mode édition.
+Ignorer les changements et fermer ?</translation>
+    </message>
+    <message>
+        <source>Export database to CSV file</source>
+        <translation>Exporter la base de données au format CSV</translation>
+    </message>
+    <message>
+        <source>CSV file</source>
+        <translation>Fichier CSV</translation>
+    </message>
+    <message>
+        <source>Writing the CSV file failed.</source>
+        <translation>Échec de l&apos;écriture du fichier CSV.</translation>
+    </message>
+    <message>
+        <source>The database you are trying to save as is locked by another instance of KeePassX.
+Do you want to save it anyway?</source>
+        <translation>La base de données que vous essayez de sauvegarder a été verrouillée par une autre instance de KeePassX.
+Voulez-vous quand même la sauvegarder ?</translation>
+    </message>
 </context>
 <context>
     <name>DatabaseWidget</name>
     <message>
         <source>Change master key</source>
-        <translation>Changer la clé maîtresse</translation>
+        <translation>Changer la clé maître</translation>
     </message>
     <message>
         <source>Delete entry?</source>
@@ -311,7 +373,15 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Current group</source>
-        <translation>Group actif</translation>
+        <translation>Groupe actif</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erreur</translation>
+    </message>
+    <message>
+        <source>Unable to calculate master key</source>
+        <translation>Impossible de calculer la clé maître</translation>
     </message>
 </context>
 <context>
@@ -322,7 +392,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Avancées</translation>
+        <translation>Avancé</translation>
     </message>
     <message>
         <source>Icon</source>
@@ -330,11 +400,11 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Auto-Type</source>
-        <translation>Auto-Type</translation>
+        <translation>Remplissage automatique</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation>Propriétés </translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <source>History</source>
@@ -379,7 +449,7 @@ Enregistrer les modifications ?</translation>
     <message>
         <source>Unable to save the attachment:
 </source>
-        <translation>Impossible de enregistrer le fichier attaché:
+        <translation>Impossible d&apos;enregistrer le fichier attaché:
 </translation>
     </message>
     <message>
@@ -396,14 +466,14 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>1 year</source>
-        <translation>Une année</translation>
+        <translation>1 an</translation>
     </message>
 </context>
 <context>
     <name>EditEntryWidgetAdvanced</name>
     <message>
         <source>Additional attributes</source>
-        <translation>Attributs additionnel </translation>
+        <translation>Attributs supplémentaires</translation>
     </message>
     <message>
         <source>Add</source>
@@ -423,22 +493,26 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Enregistrer le fichier </translation>
+        <translation>Enregistrer le fichier</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
     </message>
 </context>
 <context>
     <name>EditEntryWidgetAutoType</name>
     <message>
         <source>Enable Auto-Type for this entry</source>
-        <translation>Activer l&apos;Auto-Type pour cette entrée</translation>
+        <translation>Activer le remplissage automatique pour cette entrée</translation>
     </message>
     <message>
         <source>Inherit default Auto-Type sequence from the group</source>
-        <translation type="unfinished"/>
+        <translation>Utiliser la séquence de remplissage automatique par défaut du groupe</translation>
     </message>
     <message>
         <source>Use custom Auto-Type sequence:</source>
-        <translation>Utiliser une séquence d&apos;Auto-Type personnalisée :</translation>
+        <translation>Utiliser une séquence de remplissage automatique personnalisée :</translation>
     </message>
     <message>
         <source>+</source>
@@ -450,7 +524,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Window title:</source>
-        <translation>Titre de la fenêtre:</translation>
+        <translation>Titre de la fenêtre :</translation>
     </message>
     <message>
         <source>Use default sequence</source>
@@ -458,14 +532,14 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Set custom sequence:</source>
-        <translation type="unfinished"/>
+        <translation>Définir une séquence personnalisé :</translation>
     </message>
 </context>
 <context>
     <name>EditEntryWidgetHistory</name>
     <message>
         <source>Show</source>
-        <translation>Exposer</translation>
+        <translation>Afficher</translation>
     </message>
     <message>
         <source>Restore</source>
@@ -484,19 +558,19 @@ Enregistrer les modifications ?</translation>
     <name>EditEntryWidgetMain</name>
     <message>
         <source>Title:</source>
-        <translation>Titre:</translation>
+        <translation>Titre :</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Non d&apos;utilisateur:</translation>
+        <translation>Non d&apos;utilisateur :</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe:</translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <source>Repeat:</source>
-        <translation>Confirme: </translation>
+        <translation>Confirmation :</translation>
     </message>
     <message>
         <source>Gen.</source>
@@ -504,7 +578,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation>URL:</translation>
+        <translation>URL :</translation>
     </message>
     <message>
         <source>Expires</source>
@@ -516,7 +590,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes:</translation>
+        <translation>Notes :</translation>
     </message>
 </context>
 <context>
@@ -531,15 +605,15 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation>Propriétés </translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <source>Add group</source>
-        <translation>Ajouter un groupe. </translation>
+        <translation>Ajouter un groupe</translation>
     </message>
     <message>
         <source>Edit group</source>
-        <translation>Modifie le groupe</translation>
+        <translation>Modifier le groupe</translation>
     </message>
     <message>
         <source>Enable</source>
@@ -566,7 +640,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Expires</source>
-        <translation>Expires</translation>
+        <translation>Expiration</translation>
     </message>
     <message>
         <source>Search</source>
@@ -574,7 +648,15 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Auto-type</source>
-        <translation>Auto-type</translation>
+        <translation>Remplissage automatique</translation>
+    </message>
+    <message>
+        <source>Use default auto-type sequence of parent group</source>
+        <translation>Utiliser la séquence de remplissage automatique par défaut du groupe parent</translation>
+    </message>
+    <message>
+        <source>Set default auto-type sequence</source>
+        <translation>Définir une séquence de remplissage automatique par défaut</translation>
     </message>
 </context>
 <context>
@@ -605,7 +687,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Choisis un image. </translation>
+        <translation>Choisir une image</translation>
     </message>
     <message>
         <source>Can&apos;t delete icon!</source>
@@ -632,7 +714,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Uuid:</source>
-        <translation>Uuid:</translation>
+        <translation>Uuid :</translation>
     </message>
 </context>
 <context>
@@ -684,14 +766,14 @@ Enregistrer les modifications ?</translation>
     <name>Group</name>
     <message>
         <source>Recycle Bin</source>
-        <translation>Bac de Recyclage</translation>
+        <translation>Corbeille</translation>
     </message>
 </context>
 <context>
     <name>KeePass1OpenWidget</name>
     <message>
         <source>Import KeePass1 database</source>
-        <translation>Importe un KeePass1 bas de données</translation>
+        <translation>Importer une base de données au format KeePass1</translation>
     </message>
     <message>
         <source>Error</source>
@@ -699,14 +781,14 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Unable to open the database.</source>
-        <translation>Impossible d&apos;ouvrir la bas de données.</translation>
+        <translation>Impossible d&apos;ouvrir la base de données.</translation>
     </message>
 </context>
 <context>
     <name>KeePass1Reader</name>
     <message>
         <source>Unable to read keyfile.</source>
-        <translation>Impossible de lire le fichier de clé.</translation>
+        <translation>Impossible de lire le fichier-clé.</translation>
     </message>
     <message>
         <source>Not a KeePass database.</source>
@@ -724,6 +806,10 @@ Enregistrer les modifications ?</translation>
         <source>Root</source>
         <translation>Racine</translation>
     </message>
+    <message>
+        <source>Unable to calculate master key</source>
+        <translation>Impossible de calculer la clé maître</translation>
+    </message>
 </context>
 <context>
     <name>KeePass2Reader</name>
@@ -738,6 +824,10 @@ Enregistrer les modifications ?</translation>
     <message>
         <source>Wrong key or database file is corrupt.</source>
         <translation>Mauvaise clé ou fichier de base de donnée corrompu.</translation>
+    </message>
+    <message>
+        <source>Unable to calculate master key</source>
+        <translation>Impossible de calculer la clé maître</translation>
     </message>
 </context>
 <context>
@@ -776,10 +866,6 @@ Enregistrer les modifications ?</translation>
     <message>
         <source>Groups</source>
         <translation>Groupes</translation>
-    </message>
-    <message>
-        <source>Extras</source>
-        <translation>Extras</translation>
     </message>
     <message>
         <source>View</source>
@@ -858,16 +944,8 @@ Enregistrer les modifications ?</translation>
         <translation>Chercher</translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation>Nom d&apos;utilisateur</translation>
-    </message>
-    <message>
         <source>Copy username to clipboard</source>
         <translation>Copier le nom d&apos;utilisateur dans le presse-papiers</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>Copy password to clipboard</source>
@@ -879,7 +957,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Perform Auto-Type</source>
-        <translation>Effectuer un Auto-Type</translation>
+        <translation>Effectuer un remplissage automatique</translation>
     </message>
     <message>
         <source>Open URL</source>
@@ -913,12 +991,28 @@ Enregistrer les modifications ?</translation>
         <source>Toggle window</source>
         <translation>Basculer de fenêtre</translation>
     </message>
+    <message>
+        <source>Tools</source>
+        <translation>Outils</translation>
+    </message>
+    <message>
+        <source>Copy username</source>
+        <translation>Copier le nom d&apos;utilisateur</translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation>Copier le mot de passe</translation>
+    </message>
+    <message>
+        <source>Export to CSV file</source>
+        <translation>Exporter au format CSV</translation>
+    </message>
 </context>
 <context>
     <name>PasswordGeneratorWidget</name>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe:</translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -1023,15 +1117,15 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Error writing to underlying device: </source>
-        <translation type="unfinished"/>
+        <translation>Erreur d&apos;écriture sur le périphérique concerné :</translation>
     </message>
     <message>
         <source>Error opening underlying device: </source>
-        <translation type="unfinished"/>
+        <translation>Erreur d&apos;ouverture du périphérique concerné :</translation>
     </message>
     <message>
         <source>Error reading data from underlying device: </source>
-        <translation type="unfinished"/>
+        <translation>Erreur de lecture sur le périphérique concerné :</translation>
     </message>
     <message>
         <source>Internal zlib error when decompressing: </source>
@@ -1094,10 +1188,6 @@ Enregistrer les modifications ?</translation>
         <translation>Ouvrir les base de données précédentes au démarrage</translation>
     </message>
     <message>
-        <source>Mark as modified on expanded state changes</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Automatically save on exit</source>
         <translation>Sauvegarde automatiquement à la sortie</translation>
     </message>
@@ -1107,7 +1197,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Minimize when copying to clipboard</source>
-        <translation type="unfinished"/>
+        <translation>Réduire lors de la copie dans le presse-papiers</translation>
     </message>
     <message>
         <source>Use group icon on entry creation</source>
@@ -1115,11 +1205,11 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Global Auto-Type shortcut</source>
-        <translation>Raccourci d&apos;Auto-Type global</translation>
+        <translation>Raccourci de remplissage automatique global</translation>
     </message>
     <message>
         <source>Use entry title to match windows for global auto-type</source>
-        <translation>Utiliser la correspondance entre le titre de l&apos;entrée et de la fenêtre pour l&apos;Auto-Type global</translation>
+        <translation>Utiliser la correspondance entre le titre de l&apos;entrée et de la fenêtre pour le remplissage automatique global</translation>
     </message>
     <message>
         <source>Language</source>
@@ -1127,11 +1217,15 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Show a system tray icon</source>
-        <translation type="unfinished"/>
+        <translation>Afficher une icône dans la zone de notification</translation>
     </message>
     <message>
         <source>Hide window to system tray when minimized</source>
-        <translation type="unfinished"/>
+        <translation>Réduire la fenêtre vers la zone de notification lors de sa réduction</translation>
+    </message>
+    <message>
+        <source>Remember last key files</source>
+        <translation>Se rappeler les derniers fichiers-clés ouverts</translation>
     </message>
 </context>
 <context>
@@ -1142,7 +1236,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation>s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <source>Lock databases after inactivity of</source>
@@ -1154,7 +1248,7 @@ Enregistrer les modifications ?</translation>
     </message>
     <message>
         <source>Always ask before performing auto-type</source>
-        <translation>Toujours demander avant d&apos;effectuer un auto-type</translation>
+        <translation>Toujours demander avant d&apos;effectuer un remplissage automatique</translation>
     </message>
 </context>
 <context>
@@ -1162,14 +1256,6 @@ Enregistrer les modifications ?</translation>
     <message>
         <source>Unlock database</source>
         <translation>Déverrouiller la base de donnée</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Erreur</translation>
-    </message>
-    <message>
-        <source>Wrong key.</source>
-        <translation>Mauvaise clé.</translation>
     </message>
 </context>
 <context>
@@ -1194,12 +1280,8 @@ Enregistrer les modifications ?</translation>
         <translation>Chemin vers un fichier de configuration personnalisé</translation>
     </message>
     <message>
-        <source>password of the database (DANGEROUS!)</source>
-        <translation>Mot de passe de la base de donnée (DANGEREUX !)</translation>
-    </message>
-    <message>
         <source>key file of the database</source>
-        <translation>Fichier de clé de la base de donnée</translation>
+        <translation>Fichier-clé de la base de données</translation>
     </message>
 </context>
 </TS>

@@ -3,12 +3,15 @@
     <name>AboutDialog</name>
     <message>
         <source>About KeePassX</source>
-        <translation>A proposito di KeePassX</translation>
+        <translation>Informazioni su KeePassX</translation>
     </message>
     <message>
         <source>KeePassX is distributed under the term of the GNU General Public License (GPL) version 2 or (at your option) version 3.</source>
-        <translation>KeePassX è distribuito sotto i termini della licenza 
-GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</translation>
+        <translation>KeePassX è distribuito sotto i termini della licenza GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</translation>
+    </message>
+    <message>
+        <source>Revision</source>
+        <translation>Revisione</translation>
     </message>
 </context>
 <context>
@@ -19,7 +22,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Couldn&apos;t find an entry that matches the window title:</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile trovare una voce che corrisponda al titolo della finestra</translation>
     </message>
 </context>
 <context>
@@ -68,7 +71,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Browse</source>
-        <translation>Sfogliare</translation>
+        <translation>Sfoglia</translation>
     </message>
     <message>
         <source>Create</source>
@@ -96,7 +99,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Select a key file</source>
-        <translation>Selezionare file chiave</translation>
+        <translation>Seleziona il file chiave</translation>
     </message>
     <message>
         <source>Question</source>
@@ -112,12 +115,12 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Failed to set key file</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile impostare il file chiave</translation>
     </message>
     <message>
         <source>Failed to set %1 as the Key file:
 %2</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile impostare %1 come file Chiave: %2</translation>
     </message>
 </context>
 <context>
@@ -156,11 +159,11 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Key files</source>
-        <translation>File chiave</translation>
+        <translation>Files chiave</translation>
     </message>
     <message>
         <source>Select key file</source>
-        <translation>Selezionare file chiave</translation>
+        <translation>Seleziona file chiave</translation>
     </message>
 </context>
 <context>
@@ -171,11 +174,11 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Database description:</source>
-        <translation>Descrizione database:</translation>
+        <translation>Descrizione del database:</translation>
     </message>
     <message>
         <source>Transform rounds:</source>
-        <translation>Round di trasformazione:</translation>
+        <translation>Rounds di trasformazione:</translation>
     </message>
     <message>
         <source>Default username:</source>
@@ -191,7 +194,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Benchmark</source>
-        <translation>Benchmark</translation>
+        <translation>Prestazione</translation>
     </message>
     <message>
         <source>Max. history items:</source>
@@ -218,7 +221,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Open database</source>
-        <translation>Aprire database</translation>
+        <translation>Apri database</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -230,7 +233,7 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     </message>
     <message>
         <source>Open KeePass 1 database</source>
-        <translation>Aprire database KeePass 1</translation>
+        <translation>Apri database KeePass 1</translation>
     </message>
     <message>
         <source>KeePass 1 database</source>
@@ -243,12 +246,6 @@ GNU General Public License (GPL) versione 2 o, a tua scelta, della versione 3.</
     <message>
         <source>Close?</source>
         <translation>Chiudere?</translation>
-    </message>
-    <message>
-        <source>&quot;%1&quot; is in edit mode.
-Close anyway?</source>
-        <translation>&quot;%1&quot; è in modalità modifica.
-Chiudere comunque?</translation>
     </message>
     <message>
         <source>Save changes?</source>
@@ -283,34 +280,63 @@ Salvare le modifiche?</translation>
     <message>
         <source>The database you are trying to open is locked by another instance of KeePassX.
 Do you want to open it anyway? Alternatively the database is opened read-only.</source>
-        <translation type="unfinished"/>
+        <translation>Il Database che stai tentando di aprire è bloccato da un&apos;altra esecuzione di KeePassX.
+Vuoi aprirlo comunque? In alternativa, il database verrà aperto in sola lettura.</translation>
     </message>
     <message>
         <source>Lock database</source>
-        <translation type="unfinished"/>
+        <translation>Bloccare database</translation>
     </message>
     <message>
         <source>Can't lock the database as you are currently editing it.
 Please press cancel to finish your changes or discard them.</source>
-        <translation type="unfinished"/>
+        <translation>Non è possibile bloccare il database nel modo in cui lo stai modificando.
+Premere annulla per terminare le modifiche o scartarle .</translation>
     </message>
     <message>
         <source>This database has never been saved.
 You can save the database or stop locking it.</source>
-        <translation type="unfinished"/>
+        <translation>Questo database non è mai stato salvato.
+È possibile salvare il database o interrompere il blocco.</translation>
     </message>
     <message>
         <source>This database has been modified.
 Do you want to save the database before locking it?
 Otherwise your changes are lost.</source>
-        <translation type="unfinished"/>
+        <translation>Questo database è stato modificato.
+Vuoi salvare il database prima di bloccarlo?
+Altrimenti le modifiche verranno perse.</translation>
+    </message>
+    <message>
+        <source>&quot;%1&quot; is in edit mode.
+Discard changes and close anyway?</source>
+        <translation>&quot;%1&quot; è in modalità modifica.
+Annullare le modifiche e chiudere comunque?</translation>
+    </message>
+    <message>
+        <source>Export database to CSV file</source>
+        <translation>Esporta il database come file CSV</translation>
+    </message>
+    <message>
+        <source>CSV file</source>
+        <translation>file CSV</translation>
+    </message>
+    <message>
+        <source>Writing the CSV file failed.</source>
+        <translation>Scrittura del file CSV fallita.</translation>
+    </message>
+    <message>
+        <source>The database you are trying to save as is locked by another instance of KeePassX.
+Do you want to save it anyway?</source>
+        <translation>Il database che si sta tentando di salvare è bloccato da un&apos;altra istanza di KeePassX.
+Vuoi salvare comunque?</translation>
     </message>
 </context>
 <context>
     <name>DatabaseWidget</name>
     <message>
         <source>Change master key</source>
-        <translation>Cambiare password principale</translation>
+        <translation>Cambia password principale</translation>
     </message>
     <message>
         <source>Delete entry?</source>
@@ -350,11 +376,11 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"/>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Unable to calculate master key</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile calcolare la chiave principale</translation>
     </message>
 </context>
 <context>
@@ -409,7 +435,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Select file</source>
-        <translation>Selezionare file</translation>
+        <translation>Seleziona file</translation>
     </message>
     <message>
         <source>Unable to open file</source>
@@ -422,7 +448,7 @@ Otherwise your changes are lost.</source>
     <message>
         <source>Unable to save the attachment:
 </source>
-        <translation>Impossibile salvare l&apos;allegato
+        <translation>Impossibile salvare l&apos;allegato:
 </translation>
     </message>
     <message>
@@ -470,7 +496,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"/>
+        <translation>Aprire</translation>
     </message>
 </context>
 <context>
@@ -559,7 +585,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Presets</source>
-        <translation>Programmare</translation>
+        <translation>Presets</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -582,19 +608,19 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Add group</source>
-        <translation>Aggiungere gruppo</translation>
+        <translation>Aggiungi gruppo</translation>
     </message>
     <message>
         <source>Edit group</source>
-        <translation>Modificare gruppo</translation>
+        <translation>Modifica gruppo</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation>Abilitare</translation>
+        <translation>Abilita</translation>
     </message>
     <message>
         <source>Disable</source>
-        <translation>Disabilitare</translation>
+        <translation>Disabilita</translation>
     </message>
     <message>
         <source>Inherit from parent group (%1)</source>
@@ -625,11 +651,11 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Use default auto-type sequence of parent group</source>
-        <translation type="unfinished"/>
+        <translation>Ereditare la sequenza predefinita di auto-type dal gruppo</translation>
     </message>
     <message>
         <source>Set default auto-type sequence</source>
-        <translation type="unfinished"/>
+        <translation>Usare sequenza auto-type predefinita</translation>
     </message>
 </context>
 <context>
@@ -660,11 +686,11 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Select Image</source>
-        <translation>Selezionare Immagine</translation>
+        <translation>Seleziona Immagine</translation>
     </message>
     <message>
         <source>Can&apos;t delete icon!</source>
-        <translation>Impossibile eliminare icona!</translation>
+        <translation>Impossibile eliminare l&apos;icona!</translation>
     </message>
     <message numerus="yes">
         <source>Can&apos;t delete icon. Still used by %n item(s).</source>
@@ -739,7 +765,7 @@ Otherwise your changes are lost.</source>
     <name>Group</name>
     <message>
         <source>Recycle Bin</source>
-        <translation>Cestino (Gruppo)</translation>
+        <translation>Cestino</translation>
     </message>
 </context>
 <context>
@@ -773,15 +799,15 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Unsupported KeePass database version.</source>
-        <translation>Versione database non supportata</translation>
+        <translation>Versione database KeePass non supportata.</translation>
     </message>
     <message>
         <source>Root</source>
-        <translation>Root (KeePass1Reader)</translation>
+        <translation>Root</translation>
     </message>
     <message>
         <source>Unable to calculate master key</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile calcolare la chiave master</translation>
     </message>
 </context>
 <context>
@@ -792,26 +818,26 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Unsupported KeePass database version.</source>
-        <translation>Versione database non supportata</translation>
+        <translation>Versione database KeePass non supportata.</translation>
     </message>
     <message>
         <source>Wrong key or database file is corrupt.</source>
-        <translation>Password errata o database corrotto.</translation>
+        <translation>Password errata o file database corrotto.</translation>
     </message>
     <message>
         <source>Unable to calculate master key</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile calcolare la chiave master</translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
         <source>Fatal error while testing the cryptographic functions.</source>
-        <translation type="unfinished"/>
+        <translation>Errore fatale durante il test delle funzioni di crittografia.</translation>
     </message>
     <message>
         <source>KeePassX - Error</source>
-        <translation type="unfinished"/>
+        <translation>KeePassx - Errore</translation>
     </message>
 </context>
 <context>
@@ -834,7 +860,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Copy attribute to clipboard</source>
-        <translation>Copiare attributi negli appunti</translation>
+        <translation>Copia attributi negli appunti</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -842,7 +868,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>View</source>
-        <translation>Visualizzare</translation>
+        <translation>Visualizza</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -917,16 +943,8 @@ Otherwise your changes are lost.</source>
         <translation>Trovare</translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation>Nome Utente</translation>
-    </message>
-    <message>
         <source>Copy username to clipboard</source>
         <translation>Copiare nome utente negli appunti</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation>Password</translation>
     </message>
     <message>
         <source>Copy password to clipboard</source>
@@ -962,7 +980,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation>Mostrare barra degli strumenti</translation>
+        <translation>Mostra barra degli strumenti</translation>
     </message>
     <message>
         <source>read-only</source>
@@ -970,11 +988,23 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Toggle window</source>
-        <translation type="unfinished"/>
+        <translation>Cambia finestra</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"/>
+        <translation>Strumenti</translation>
+    </message>
+    <message>
+        <source>Copy username</source>
+        <translation>Copia nome utente</translation>
+    </message>
+    <message>
+        <source>Copy password</source>
+        <translation>Copia password</translation>
+    </message>
+    <message>
+        <source>Export to CSV file</source>
+        <translation>Esporta in un file CSV</translation>
     </message>
 </context>
 <context>
@@ -1120,7 +1150,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation>Case sensitive</translation>
+        <translation>Riconoscimento di maiuscole e minuscole</translation>
     </message>
     <message>
         <source>Current group</source>
@@ -1150,7 +1180,7 @@ Otherwise your changes are lost.</source>
     <name>SettingsWidgetGeneral</name>
     <message>
         <source>Remember last databases</source>
-        <translation>Ricordare ultimo database</translation>
+        <translation>Ricorda ultimo database</translation>
     </message>
     <message>
         <source>Open previous databases on startup</source>
@@ -1182,19 +1212,19 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"/>
+        <translation>Lingua</translation>
     </message>
     <message>
         <source>Show a system tray icon</source>
-        <translation type="unfinished"/>
+        <translation>Mostra un&apos;icona nell&apos;area di notifica del sistema</translation>
     </message>
     <message>
         <source>Hide window to system tray when minimized</source>
-        <translation type="unfinished"/>
+        <translation>Nascondi la finestra nell&apos;area di notifica del sistema quando viene minimizzata</translation>
     </message>
     <message>
         <source>Remember last key files</source>
-        <translation type="unfinished"/>
+        <translation>Ricorda gli ultimi files chiave</translation>
     </message>
 </context>
 <context>
@@ -1209,7 +1239,7 @@ Otherwise your changes are lost.</source>
     </message>
     <message>
         <source>Lock databases after inactivity of</source>
-        <translation>Bloccare database dopo un&apos;inattività di</translation>
+        <translation>Bloccare i database dopo un&apos;inattività di</translation>
     </message>
     <message>
         <source>Show passwords in cleartext by default</source>
@@ -1231,14 +1261,14 @@ Otherwise your changes are lost.</source>
     <name>WelcomeWidget</name>
     <message>
         <source>Welcome!</source>
-        <translation>Benvenuto/a!</translation>
+        <translation>Benvenuto!</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>KeePassX - cross-platform password manager</source>
-        <translation>KeePassX - gestore di password cross-platform</translation>
+        <translation>KeePassX - gestore di password multipiattafroma</translation>
     </message>
     <message>
         <source>filename of the password database to open (*.kdbx)</source>
@@ -1247,10 +1277,6 @@ Otherwise your changes are lost.</source>
     <message>
         <source>path to a custom config file</source>
         <translation>percorso ad un file di configurazione personalizzato</translation>
-    </message>
-    <message>
-        <source>password of the database (DANGEROUS!)</source>
-        <translation>password del database (PERICOLOSO!)</translation>
     </message>
     <message>
         <source>key file of the database</source>

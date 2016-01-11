@@ -20,6 +20,7 @@
 
 #include <QCloseEvent>
 #include <QShortcut>
+#include <QTimer>
 
 #include "autotype/AutoType.h"
 #include "core/Config.h"
@@ -33,7 +34,7 @@ const QString MainWindow::BaseWindowTitle = "KeePassX";
 
 MainWindow::MainWindow()
     : m_ui(new Ui::MainWindow())
-    , m_trayIcon(Q_NULLPTR)
+    , m_trayIcon(nullptr)
 {
     m_ui->setupUi(this);
 
@@ -92,9 +93,7 @@ MainWindow::MainWindow()
     m_ui->actionEntryOpenUrl->setShortcut(Qt::CTRL + Qt::Key_U);
     m_ui->actionEntryCopyURL->setShortcut(Qt::CTRL + Qt::ALT + Qt::Key_U);
 
-#ifdef Q_OS_MAC
     new QShortcut(Qt::CTRL + Qt::Key_M, this, SLOT(showMinimized()));
-#endif
 
     m_ui->actionDatabaseNew->setIcon(filePath()->icon("actions", "document-new"));
     m_ui->actionDatabaseOpen->setIcon(filePath()->icon("actions", "document-open"));
@@ -222,6 +221,7 @@ void MainWindow::updateLastDatabasesMenu()
     QStringList lastDatabases = config()->get("LastDatabases", QVariant()).toStringList();
     Q_FOREACH (const QString& database, lastDatabases) {
         QAction* action = m_ui->menuRecentDatabases->addAction(database);
+        action->setData(database);
         m_lastDatabasesActions->addAction(action);
     }
     m_ui->menuRecentDatabases->addSeparator();
@@ -252,7 +252,7 @@ void MainWindow::updateCopyAttributesMenu()
 
 void MainWindow::openRecentDatabase(QAction* action)
 {
-    openDatabase(action->text());
+    openDatabase(action->data().toString());
 }
 
 void MainWindow::clearLastDatabases()
@@ -444,13 +444,14 @@ void MainWindow::closeEvent(QCloseEvent* event)
     }
 }
 
-void MainWindow::changeEvent(QEvent *event)
+void MainWindow::changeEvent(QEvent* event)
 {
     if ((event->type() == QEvent::WindowStateChange) && isMinimized()
-            && isTrayIconEnabled() && config()->get("GUI/MinimizeToTray").toBool())
+            && isTrayIconEnabled() && m_trayIcon && m_trayIcon->isVisible()
+            && config()->get("GUI/MinimizeToTray").toBool())
     {
         event->ignore();
-        hide();
+        QTimer::singleShot(0, this, SLOT(hide()));
     }
     else {
         QMainWindow::changeEvent(event);
@@ -514,7 +515,7 @@ void MainWindow::updateTrayIcon()
         if (m_trayIcon) {
             m_trayIcon->hide();
             delete m_trayIcon;
-            m_trayIcon = Q_NULLPTR;
+            m_trayIcon = nullptr;
         }
     }
 }
@@ -576,10 +577,12 @@ void MainWindow::trayIconTriggered(QSystemTrayIcon::ActivationReason reason)
 
 void MainWindow::toggleWindow()
 {
-    if (QApplication::activeWindow() == this) {
+    if ((QApplication::activeWindow() == this) && isVisible() && !isMinimized()) {
         hide();
     }
     else {
+        ensurePolished();
+        setWindowState(windowState() & ~Qt::WindowMinimized);
         show();
         raise();
         activateWindow();
@@ -598,6 +601,11 @@ void MainWindow::lockDatabasesAfterInactivity()
 
 bool MainWindow::isTrayIconEnabled() const
 {
+#ifdef Q_OS_MAC
+    // systray not useful on OS X
+    return false;
+#else
     return config()->get("GUI/ShowTrayIcon").toBool()
             && QSystemTrayIcon::isSystemTrayAvailable();
+#endif
 }

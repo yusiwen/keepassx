@@ -18,6 +18,8 @@
 #include "DatabaseTabWidget.h"
 
 #include <QFileInfo>
+#include <QLockFile>
+#include <QSaveFile>
 #include <QTabWidget>
 
 #include "autotype/AutoType.h"
@@ -25,8 +27,8 @@
 #include "core/Database.h"
 #include "core/Group.h"
 #include "core/Metadata.h"
-#include "core/qsavefile.h"
 #include "format/CsvExporter.h"
+#include "gui/Clipboard.h"
 #include "gui/DatabaseWidget.h"
 #include "gui/DatabaseWidgetStateSync.h"
 #include "gui/DragTabBar.h"
@@ -36,8 +38,8 @@
 #include "gui/group/GroupView.h"
 
 DatabaseManagerStruct::DatabaseManagerStruct()
-    : dbWidget(Q_NULLPTR)
-    , lockFile(Q_NULLPTR)
+    : dbWidget(nullptr)
+    , lockFile(nullptr)
     , saveToFilename(false)
     , modified(false)
     , readOnly(false)
@@ -159,7 +161,7 @@ void DatabaseTabWidget::openDatabase(const QString& fileName, const QString& pw,
             if (result == QMessageBox::No) {
                 dbStruct.readOnly = true;
                 delete lockFile;
-                lockFile = Q_NULLPTR;
+                lockFile = nullptr;
             }
             else {
                 // take over the lock file if possible
@@ -326,8 +328,12 @@ bool DatabaseTabWidget::saveDatabaseAs(Database* db)
     if (dbStruct.saveToFilename) {
         oldFileName = dbStruct.filePath;
     }
+    else {
+        oldFileName = tr("New database").append(".kdbx");
+    }
     QString fileName = fileDialog()->getSaveFileName(this, tr("Save database as"),
-                                                     oldFileName, tr("KeePass 2 Database").append(" (*.kdbx)"));
+                                                     oldFileName, tr("KeePass 2 Database").append(" (*.kdbx)"),
+                                                     nullptr, 0, "kdbx");
     if (!fileName.isEmpty()) {
         QFileInfo fileInfo(fileName);
         QString lockFilePath;
@@ -447,7 +453,8 @@ void DatabaseTabWidget::exportToCsv()
     }
 
     QString fileName = fileDialog()->getSaveFileName(this, tr("Export database to CSV file"),
-                                                     QString(), tr("CSV file").append(" (*.csv)"));
+                                                     QString(), tr("CSV file").append(" (*.csv)"),
+                                                     nullptr, 0, "csv");
     if (fileName.isEmpty()) {
         return;
     }
@@ -552,7 +559,7 @@ Database* DatabaseTabWidget::indexDatabase(int index)
         }
     }
 
-    return Q_NULLPTR;
+    return nullptr;
 }
 
 DatabaseManagerStruct DatabaseTabWidget::indexDatabaseManagerStruct(int index)
@@ -580,7 +587,7 @@ Database* DatabaseTabWidget::databaseFromDatabaseWidget(DatabaseWidget* dbWidget
         }
     }
 
-    return Q_NULLPTR;
+    return nullptr;
 }
 
 void DatabaseTabWidget::insertDatabase(Database* db, const DatabaseManagerStruct& dbStruct)
@@ -605,7 +612,7 @@ DatabaseWidget* DatabaseTabWidget::currentDatabaseWidget()
         return m_dbList[db].dbWidget;
     }
     else {
-        return Q_NULLPTR;
+        return nullptr;
     }
 }
 
@@ -627,6 +634,8 @@ bool DatabaseTabWidget::hasLockableDatabases() const
 
 void DatabaseTabWidget::lockDatabases()
 {
+    clipboard()->clearCopiedText();
+
     for (int i = 0; i < count(); i++) {
         DatabaseWidget* dbWidget = static_cast<DatabaseWidget*>(widget(i));
         Database* db = databaseFromDatabaseWidget(dbWidget);
